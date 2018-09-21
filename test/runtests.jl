@@ -1,6 +1,15 @@
 using Test 
 using Example2018
 
-z = Polynomial([0])
-p = Polynomial([1,2,3])
-@test p + z == p
+@testset "Polynomials form a ring" begin
+
+	z = Polynomial([0])
+
+	for n in 1:100
+		deg = rand(0:100)
+		p = Polynomial(rand(-100000:100000, deg+1))
+		@test p + z == p
+		@test z + p == p
+		@test p + (-p) == z
+	end
+end
